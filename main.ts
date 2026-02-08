@@ -122,8 +122,8 @@ function frame(now: number) {
                 const t = ease((elapsed - hold) / fade, easing);
                 for (const cellIndex of group) {
                     const cell = cells[cellIndex]!;
-                    cell.style.opacity = "1";
-                    cell.style.background = lerpColor(t, srgb, p3);
+                    cell.style.opacity = String(1 - t);
+                    cell.style.background = lerpColor(0, srgb, p3);
                     cell.style.filter = `brightness(${1 - t * 0.5})`;
                 }
             }
