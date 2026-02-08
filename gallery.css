@@ -71,13 +71,21 @@ body {
 .bloom-cell::after {
     content: "";
     position: absolute;
-    top: 10%;
     width: 100%;
     height: 100%;
     background: inherit;
     background-size: 100% 100%;
     filter: blur(var(--cell-size)) brightness(80%) opacity(0.8);
     z-index: -1;
+}
+.bloom-cell::before {
+    top: -10%;
+    left: -10%;
+}
+
+.bloom-cell::after {
+    bottom: -10%;
+    left: -10%;
 }
 
 @media (max-width: 640px) {
