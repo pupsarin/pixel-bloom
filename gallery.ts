@@ -10,12 +10,12 @@ interface BloomConfig {
 }
 
 const configs: BloomConfig[] = [
-    { label: "Loading", pattern: [4, 1, 2, 5, 8, 7, 6, 3, 0], srgb: [0, 255, 255], p3: [0, 0.92, 0.92], stagger: 180, hold: 350, fade: 350, offset: 0 },
+    { label: "Loading", pattern: [1, 2, 5, 8, 7, 6, 3, 0], srgb: [0, 255, 255], p3: [0, 0.92, 0.92], stagger: 180, hold: 350, fade: 350, offset: 0 },
     { label: "Computing", pattern: [0, 3, 6, 1, 4, 7, 2, 5, 8], srgb: [255, 0, 255], p3: [0.92, 0, 0.92], stagger: 160, hold: 400, fade: 400, offset: 500 },
     { label: "Downloading", pattern: [0, 1, 2, 3, 4, 5, 6, 7, 8], srgb: [57, 255, 20], p3: [0.25, 0.95, 0.1], stagger: 200, hold: 380, fade: 380, offset: 1000 },
     { label: "Searching", pattern: [4, 1, 3, 5, 7, 0, 2, 6, 8], srgb: [68, 102, 255], p3: [0.28, 0.42, 0.98], stagger: 190, hold: 420, fade: 360, offset: 1500 },
     { label: "Processing", pattern: [0, 1, 2, 5, 4, 3, 6, 7, 8], srgb: [255, 102, 0], p3: [0.95, 0.42, 0], stagger: 170, hold: 360, fade: 420, offset: 2000 },
-    { label: "Compiling", pattern: [0, 3, 6, 7, 8, 5, 2, 1, 4], srgb: [255, 224, 0], p3: [0.95, 0.88, 0], stagger: 210, hold: 340, fade: 380, offset: 2500 },
+    { label: "Compiling", pattern: [0, 3, 6, 7, 8, 5, 2, 1], srgb: [255, 224, 0], p3: [0.95, 0.88, 0], stagger: 210, hold: 340, fade: 380, offset: 2500 },
     { label: "Rendering", pattern: [0, 1, 3, 2, 4, 6, 5, 7, 8], srgb: [191, 0, 255], p3: [0.72, 0, 0.95], stagger: 185, hold: 400, fade: 350, offset: 3000 },
     { label: "Syncing", pattern: [0, 8, 2, 6, 4, 1, 3, 5, 7], srgb: [255, 0, 51], p3: [0.95, 0, 0.22], stagger: 175, hold: 380, fade: 400, offset: 3500 },
     { label: "Uploading", pattern: [6, 7, 8, 3, 4, 5, 0, 1, 2], srgb: [0, 255, 127], p3: [0, 0.95, 0.52], stagger: 195, hold: 360, fade: 360, offset: 4000 },
