@@ -15,7 +15,7 @@ const header = document.createElement("div");
 header.className = "playground-header";
 const backLink = document.createElement("a");
 backLink.className = "back-link";
-backLink.href = "/";
+backLink.href = "./";
 backLink.textContent = "\u2190 Gallery";
 header.appendChild(backLink);
 root.appendChild(header);

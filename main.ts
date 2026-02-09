@@ -38,7 +38,7 @@ const footer = document.createElement("div");
 footer.className = "gallery-footer";
 const navLink = document.createElement("a");
 navLink.className = "nav-link";
-navLink.href = "/playground";
+navLink.href = "./playground";
 navLink.textContent = "Playground \u2192";
 footer.appendChild(navLink);
 gallery.appendChild(footer);
