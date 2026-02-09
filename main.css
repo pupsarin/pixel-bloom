@@ -8,10 +8,10 @@ body {
     box-sizing: border-box;
 
     --base: 3px;
-    --step-1: calc(var(--base) * 1.618);   /* ~8px */
-    --step-2: calc(var(--step-1) * 1.618);  /* ~13px */
-    --step-3: calc(var(--step-2) * 1.618);  /* ~21px */
-    --step-4: calc(var(--step-3) * 1.618);  /* ~34px */
+    --step-1: calc(var(--base) * 1.618); /* ~8px */
+    --step-2: calc(var(--step-1) * 1.618); /* ~13px */
+    --step-3: calc(var(--step-2) * 1.618); /* ~21px */
+    --step-4: calc(var(--step-3) * 1.618); /* ~34px */
 
     --cell-size: var(--step-1);
     --gap: var(--step-2);
@@ -43,7 +43,7 @@ body {
 }
 
 .bloom-label {
-    font-family: 'Martian Mono', monospace;
+    font-family: "Martian Mono", monospace;
     font-size: 16px;
     line-height: 1;
     color: #fff;

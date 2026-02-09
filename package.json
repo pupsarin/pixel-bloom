@@ -1,15 +1,25 @@
 {
-  "name": "bloom",
-  "module": "index.ts",
-  "type": "module",
-  "scripts": {
-    "start": "bun run index.ts",
-    "build": "bun build ./index.html --outdir ./dist"
-  },
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  }
+    "name": "bloom",
+    "module": "index.ts",
+    "type": "module",
+    "scripts": {
+        "start": "bun run index.ts",
+        "build": "bun build ./index.html --outdir ./dist",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@types/bun": "latest",
+        "eslint": "^10.0.0",
+        "eslint-config-prettier": "^10.1.8",
+        "jiti": "^2.6.1",
+        "prettier": "^3.8.1",
+        "typescript-eslint": "^8.54.0"
+    },
+    "peerDependencies": {
+        "typescript": "^5"
+    }
 }
