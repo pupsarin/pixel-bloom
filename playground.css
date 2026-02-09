@@ -123,6 +123,113 @@ body {
     min-height: 1em;
 }
 
+/* ── Pattern editor ──────────────────────────────────────────── */
+
+.pattern-editor {
+    display: flex;
+    flex-direction: column;
+    gap: var(--step-1);
+}
+
+.pattern-editor-label {
+    font-family: "Martian Mono", monospace;
+    font-size: 12px;
+    color: #a1a1aa;
+    letter-spacing: 0.02em;
+}
+
+.frame-tabs {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.frame-tab {
+    font-family: "Martian Mono", monospace;
+    font-size: 11px;
+    color: #a1a1aa;
+    background: #09090b;
+    border: 1px solid #27272a;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition:
+        background 0.15s,
+        border-color 0.15s,
+        color 0.15s;
+    user-select: none;
+}
+
+.frame-tab:hover {
+    background: #18181b;
+}
+
+.frame-tab.active {
+    color: #fff;
+    border-color: #52525b;
+    background: #27272a;
+}
+
+.frame-actions {
+    display: flex;
+    gap: 4px;
+    margin-left: 4px;
+}
+
+.frame-action-btn {
+    font-family: "Martian Mono", monospace;
+    font-size: 13px;
+    line-height: 1;
+    color: #52525b;
+    background: none;
+    border: 1px solid #27272a;
+    border-radius: 4px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+        color 0.15s,
+        border-color 0.15s;
+    padding: 0;
+}
+
+.frame-action-btn:hover {
+    color: #a1a1aa;
+    border-color: #52525b;
+}
+
+.pattern-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    width: 96px;
+}
+
+.pattern-cell {
+    width: 30px;
+    height: 30px;
+    background: #18181b;
+    border: 1px solid #27272a;
+    border-radius: 4px;
+    cursor: pointer;
+    transition:
+        background 0.15s,
+        border-color 0.15s;
+}
+
+.pattern-cell:hover {
+    border-color: #52525b;
+}
+
+.pattern-cell.on {
+    background: #52525b;
+    border-color: #71717a;
+}
+
 .color-row {
     display: flex;
     align-items: flex-end;

@@ -102,10 +102,130 @@ function addSeparator() {
 const animationNames = Object.keys(animations) as (keyof typeof animations)[];
 const presetSelect = addSelect("Animation Preset", ["(custom)", ...animationNames]);
 
+// ── Pattern editor (visual 3x3 grid + frames) ───────────────────
+
+let frames: number[][] = [[1], [2], [5], [8], [7], [6], [3], [0]];
+let activeFrame = 0;
+
+const patternEditor = document.createElement("div");
+patternEditor.className = "pattern-editor";
+
+const patternLabel = document.createElement("div");
+patternLabel.className = "pattern-editor-label";
+patternLabel.textContent = "Pattern";
+patternEditor.appendChild(patternLabel);
+
+// Frame tabs row
+const frameTabsRow = document.createElement("div");
+frameTabsRow.className = "frame-tabs";
+patternEditor.appendChild(frameTabsRow);
+
+// 3x3 grid
+const patternGrid = document.createElement("div");
+patternGrid.className = "pattern-grid";
+const patternCells: HTMLElement[] = [];
+for (let i = 0; i < 9; i++) {
+    const cell = document.createElement("div");
+    cell.className = "pattern-cell";
+    cell.addEventListener("click", () => {
+        const frame = frames[activeFrame]!;
+        const idx = frame.indexOf(i);
+        if (idx >= 0) {
+            frame.splice(idx, 1);
+        } else {
+            frame.push(i);
+        }
+        syncTextareaFromFrames();
+        renderPatternEditor();
+        presetSelect.value = "(custom)";
+        liveUpdate();
+    });
+    patternGrid.appendChild(cell);
+    patternCells.push(cell);
+}
+patternEditor.appendChild(patternGrid);
+
+controlsEl.appendChild(patternEditor);
+
+// JSON textarea (still available for advanced editing)
 const patternInput = addTextarea("Pattern (JSON)", "");
 const patternError = document.createElement("div");
 patternError.className = "pattern-error";
 controlsEl.appendChild(patternError);
+
+function syncTextareaFromFrames() {
+    patternInput.value = JSON.stringify(frames);
+    patternError.textContent = "";
+}
+
+function syncFramesFromTextarea() {
+    const parsed = parsePattern(patternInput.value);
+    if (parsed && parsed.length > 0) {
+        frames = parsed;
+        if (activeFrame >= frames.length) activeFrame = frames.length - 1;
+        renderPatternEditor();
+    }
+}
+
+function renderPatternEditor() {
+    // Rebuild frame tabs
+    frameTabsRow.innerHTML = "";
+    for (let i = 0; i < frames.length; i++) {
+        const tab = document.createElement("button");
+        tab.className = "frame-tab" + (i === activeFrame ? " active" : "");
+        tab.textContent = String(i + 1);
+        tab.addEventListener("click", () => {
+            activeFrame = i;
+            renderPatternEditor();
+        });
+        frameTabsRow.appendChild(tab);
+    }
+
+    // Action buttons
+    const actions = document.createElement("div");
+    actions.className = "frame-actions";
+
+    const addBtn = document.createElement("button");
+    addBtn.className = "frame-action-btn";
+    addBtn.textContent = "+";
+    addBtn.title = "Add frame";
+    addBtn.addEventListener("click", () => {
+        frames.push([]);
+        activeFrame = frames.length - 1;
+        syncTextareaFromFrames();
+        renderPatternEditor();
+        presetSelect.value = "(custom)";
+        liveUpdate();
+    });
+    actions.appendChild(addBtn);
+
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "frame-action-btn";
+    removeBtn.textContent = "\u2212";
+    removeBtn.title = "Remove frame";
+    if (frames.length <= 1) {
+        removeBtn.style.opacity = "0.3";
+        removeBtn.style.pointerEvents = "none";
+    }
+    removeBtn.addEventListener("click", () => {
+        if (frames.length <= 1) return;
+        frames.splice(activeFrame, 1);
+        if (activeFrame >= frames.length) activeFrame = frames.length - 1;
+        syncTextareaFromFrames();
+        renderPatternEditor();
+        presetSelect.value = "(custom)";
+        liveUpdate();
+    });
+    actions.appendChild(removeBtn);
+
+    frameTabsRow.appendChild(actions);
+
+    // Update 3x3 grid highlights
+    const frame = frames[activeFrame] ?? [];
+    for (let i = 0; i < 9; i++) {
+        patternCells[i]!.className = "pattern-cell" + (frame.includes(i) ? " on" : "");
+    }
+}
 
 const staggerInput = addNumber("Stagger (ms)", 180, 0, 10000, 10);
 const holdInput = addNumber("Hold (ms)", 350, 0, 10000, 10);
@@ -255,6 +375,7 @@ function liveUpdate() {
 function loadAnimationPreset(name: keyof typeof animations) {
     const preset = animations[name];
     patternInput.value = JSON.stringify(preset.pattern);
+    syncFramesFromTextarea();
     staggerInput.value = String(preset.stagger);
     holdInput.value = String(preset.hold);
     fadeInput.value = String(preset.fade);
@@ -289,7 +410,12 @@ colorPresetSelect.addEventListener("change", () => {
 });
 
 // Manual edits → flip preset to (custom)
-const animInputs = [patternInput, staggerInput, holdInput, fadeInput, offsetInput, easingSelect];
+patternInput.addEventListener("input", () => {
+    presetSelect.value = "(custom)";
+    syncFramesFromTextarea();
+    liveUpdate();
+});
+const animInputs = [staggerInput, holdInput, fadeInput, offsetInput, easingSelect];
 for (const el of animInputs) {
     el.addEventListener("input", () => {
         presetSelect.value = "(custom)";
@@ -324,4 +450,5 @@ presetSelect.value = "loading";
 loadAnimationPreset("loading");
 colorPresetSelect.value = "cyan";
 loadColorPreset("cyan");
+renderPatternEditor();
 liveUpdate();
