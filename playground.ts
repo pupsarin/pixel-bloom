@@ -295,6 +295,41 @@ colorGroup.className = "control-group";
 colorGroup.appendChild(colorRow);
 controlsEl.appendChild(colorGroup);
 
+addSeparator();
+
+// ── Cell size control ───────────────────────────────────────────
+
+const cellSizeGroup = document.createElement("div");
+cellSizeGroup.className = "control-group";
+const cellSizeLabel = document.createElement("label");
+cellSizeLabel.textContent = "Cell Size";
+cellSizeGroup.appendChild(cellSizeLabel);
+
+const cellSizeRow = document.createElement("div");
+cellSizeRow.className = "control-row";
+
+const cellSizeRange = document.createElement("input");
+cellSizeRange.type = "range";
+cellSizeRange.min = "4";
+cellSizeRange.max = "60";
+cellSizeRange.value = "24";
+cellSizeRange.className = "cell-size-range";
+
+const cellSizeValue = document.createElement("span");
+cellSizeValue.className = "cell-size-value";
+cellSizeValue.textContent = "24px";
+
+cellSizeRange.addEventListener("input", () => {
+    const size = cellSizeRange.value;
+    previewContainer.style.setProperty("--cell-size", `${size}px`);
+    cellSizeValue.textContent = `${size}px`;
+});
+
+cellSizeRow.appendChild(cellSizeRange);
+cellSizeRow.appendChild(cellSizeValue);
+cellSizeGroup.appendChild(cellSizeRow);
+controlsEl.appendChild(cellSizeGroup);
+
 // ── Copy config button ──────────────────────────────────────────
 
 const copyBtn = document.createElement("button");

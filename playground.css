@@ -281,6 +281,21 @@ body {
     border-radius: 5px;
 }
 
+.cell-size-range {
+    flex: 1;
+    min-width: 0;
+    accent-color: #52525b;
+    cursor: pointer;
+}
+
+.cell-size-value {
+    font-family: "Martian Mono", monospace;
+    font-size: 12px;
+    color: #a1a1aa;
+    min-width: 42px;
+    text-align: right;
+}
+
 .copy-config-btn {
     font-family: "Martian Mono", monospace;
     font-size: 13px;
