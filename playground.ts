@@ -295,6 +295,25 @@ colorGroup.className = "control-group";
 colorGroup.appendChild(colorRow);
 controlsEl.appendChild(colorGroup);
 
+// ── Copy config button ──────────────────────────────────────────
+
+const copyBtn = document.createElement("button");
+copyBtn.className = "copy-config-btn";
+copyBtn.textContent = "📋 Copy Config";
+copyBtn.addEventListener("click", () => {
+    const config = buildConfig();
+    if (!config) return;
+    const { p3: _, ...rest } = config;
+    const json = JSON.stringify(rest, null, 2);
+    navigator.clipboard.writeText(json).then(() => {
+        copyBtn.textContent = "✅ Copied!";
+        setTimeout(() => {
+            copyBtn.textContent = "📋 Copy Config";
+        }, 1500);
+    });
+});
+controlsEl.appendChild(copyBtn);
+
 // ── State ────────────────────────────────────────────────────────
 
 let currentHandle: BloomHandle | null = null;

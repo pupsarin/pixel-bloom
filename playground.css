@@ -281,6 +281,26 @@ body {
     border-radius: 5px;
 }
 
+.copy-config-btn {
+    font-family: "Martian Mono", monospace;
+    font-size: 13px;
+    color: #fff;
+    background: #09090b;
+    border: 1px solid #27272a;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+    transition:
+        background 0.2s,
+        border-color 0.2s;
+    margin-top: var(--step-1);
+}
+
+.copy-config-btn:hover {
+    background: #18181b;
+    border-color: #52525b;
+}
+
 .preview {
     flex: 1;
     display: flex;
