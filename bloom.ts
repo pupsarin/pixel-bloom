@@ -5,7 +5,7 @@ export interface BloomAnimation {
     stagger: number;
     hold: number;
     fade: number;
-    offset: number;
+
     wrap: boolean;
     easing: Easing;
 }
@@ -32,7 +32,7 @@ export const animations = {
         stagger: 180,
         hold: 350,
         fade: 350,
-        offset: 0,
+
         wrap: true,
         easing: "linear",
     },
@@ -45,7 +45,7 @@ export const animations = {
         stagger: 350,
         hold: 400,
         fade: 400,
-        offset: 500,
+
         wrap: true,
         easing: "ease-in-out",
     },
@@ -58,7 +58,7 @@ export const animations = {
         stagger: 380,
         hold: 380,
         fade: 380,
-        offset: 1000,
+
         wrap: false,
         easing: "linear",
     },
@@ -67,7 +67,7 @@ export const animations = {
         stagger: 190,
         hold: 420,
         fade: 360,
-        offset: 1500,
+
         wrap: false,
         easing: "ease-out",
     },
@@ -76,7 +76,7 @@ export const animations = {
         stagger: 170,
         hold: 360,
         fade: 420,
-        offset: 2000,
+
         wrap: false,
         easing: "ease-in",
     },
@@ -85,7 +85,7 @@ export const animations = {
         stagger: 210,
         hold: 340,
         fade: 380,
-        offset: 2500,
+
         wrap: true,
         easing: "linear",
     },
@@ -94,7 +94,7 @@ export const animations = {
         stagger: 185,
         hold: 400,
         fade: 350,
-        offset: 3000,
+
         wrap: false,
         easing: "ease-in",
     },
@@ -103,7 +103,7 @@ export const animations = {
         stagger: 175,
         hold: 380,
         fade: 400,
-        offset: 3500,
+
         wrap: true,
         easing: "ease-in-out",
     },
@@ -116,7 +116,7 @@ export const animations = {
         stagger: 370,
         hold: 360,
         fade: 360,
-        offset: 4000,
+
         wrap: false,
         easing: "linear",
     },
@@ -128,7 +128,7 @@ export const animations = {
         stagger: 165,
         hold: 420,
         fade: 380,
-        offset: 4500,
+
         wrap: true,
         easing: "ease-out",
     },
@@ -141,7 +141,7 @@ export const animations = {
         stagger: 370,
         hold: 370,
         fade: 400,
-        offset: 5000,
+
         wrap: true,
         easing: "ease-in-out",
     },
@@ -150,7 +150,7 @@ export const animations = {
         stagger: 180,
         hold: 390,
         fade: 370,
-        offset: 5500,
+
         wrap: false,
         easing: "ease-out",
     },
@@ -226,10 +226,10 @@ function animateInstance(inst: BloomInstance, now: number) {
     if (inst.startTime === null) inst.startTime = now;
 
     const { cells, config } = inst;
-    const { pattern, srgb, p3, stagger, hold, fade, offset, wrap, easing: easingType } = config;
+    const { pattern, srgb, p3, stagger, hold, fade, wrap, easing: easingType } = config;
     const visible = hold + fade;
     const cycle = pattern.length * stagger + (wrap ? 0 : visible);
-    const cycleTime = (now - inst.startTime + offset) % cycle;
+    const cycleTime = (now - inst.startTime) % cycle;
 
     for (const cell of cells) {
         cell.style.opacity = "0";

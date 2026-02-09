@@ -36,7 +36,7 @@ const handle = bloom(container, {
   stagger: 190,
   hold: 420,
   fade: 360,
-  offset: 0,
+
   wrap: false,
   easing: "ease-out",
   srgb: [0, 255, 255],
@@ -69,7 +69,7 @@ Appends a 3x3 grid to `container` and starts animating.
 | `stagger` | `number` | Delay in ms between each frame group |
 | `hold` | `number` | Duration in ms a cell stays fully lit |
 | `fade` | `number` | Duration in ms for the fade-out |
-| `offset` | `number` | Time offset in ms (for staggering multiple instances) |
+
 | `wrap` | `boolean` | Whether the animation wraps seamlessly or pauses between cycles |
 | `easing` | `string` | Fade curve: `linear`, `ease-in`, `ease-out`, `ease-in-out` |
 | `srgb` | `[r, g, b]` | sRGB color (0-255 per channel) |

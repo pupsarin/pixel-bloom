@@ -230,7 +230,7 @@ function renderPatternEditor() {
 const staggerInput = addNumber("Stagger (ms)", 180, 0, 10000, 10);
 const holdInput = addNumber("Hold (ms)", 350, 0, 10000, 10);
 const fadeInput = addNumber("Fade (ms)", 350, 0, 10000, 10);
-const offsetInput = addNumber("Offset (ms)", 0, 0, 10000, 10);
+
 
 // Wrap checkbox
 const wrapGroup = document.createElement("div");
@@ -357,7 +357,7 @@ function buildConfig(): BloomConfig | null {
         stagger: Number(staggerInput.value) || 0,
         hold: Number(holdInput.value) || 0,
         fade: Number(fadeInput.value) || 0,
-        offset: Number(offsetInput.value) || 0,
+
         wrap: wrapCheck.checked,
         easing: easingSelect.value as Easing,
         srgb,
@@ -398,7 +398,7 @@ function loadAnimationPreset(name: keyof typeof animations) {
     staggerInput.value = String(preset.stagger);
     holdInput.value = String(preset.hold);
     fadeInput.value = String(preset.fade);
-    offsetInput.value = String(preset.offset);
+
     wrapCheck.checked = preset.wrap;
     easingSelect.value = preset.easing;
     patternError.textContent = "";
@@ -434,7 +434,7 @@ patternInput.addEventListener("input", () => {
     syncFramesFromTextarea();
     liveUpdate();
 });
-const animInputs = [staggerInput, holdInput, fadeInput, offsetInput, easingSelect];
+const animInputs = [staggerInput, holdInput, fadeInput, easingSelect];
 for (const el of animInputs) {
     el.addEventListener("input", () => {
         presetSelect.value = "(custom)";
