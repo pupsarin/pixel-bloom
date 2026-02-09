@@ -4,7 +4,7 @@
     "type": "module",
     "scripts": {
         "start": "bun run index.ts",
-        "build": "bun build ./index.html --outdir ./dist",
+        "build": "bun build ./index.html ./playground.html --outdir ./dist && mkdir -p ./dist/playground && cp ./dist/playground.html ./dist/playground/index.html",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "format": "prettier --write .",

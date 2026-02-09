@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #2a2a2a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
+    --base: 3px;
+    --step-1: calc(var(--base) * 1.618); /* ~8px */
+    --step-2: calc(var(--step-1) * 1.618); /* ~13px */
+    --step-3: calc(var(--step-2) * 1.618); /* ~21px */
+    --step-4: calc(var(--step-3) * 1.618); /* ~34px */
+
+    --cell-size: var(--step-1);
+    --gap: var(--step-2);
+    --page-padding: var(--step-4);
+
+    padding: var(--page-padding);
+}
+
+.bloom-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.bloom-cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    opacity: 0;
+    position: relative;
+}
+
+.bloom-cell::before,
+.bloom-cell::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    background-size: 100% 100%;
+    filter: blur(var(--cell-size)) brightness(80%) opacity(0.8);
+    z-index: -1;
+}
+.bloom-cell::before {
+    top: -10%;
+    left: -10%;
+}
+
+.bloom-cell::after {
+    bottom: -10%;
+    left: -10%;
+}
+
+.github-link {
+    position: fixed;
+    top: var(--step-3);
+    right: var(--step-3);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #09090b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 10;
+}
+
+.github-link:hover {
+    background: #18181b;
+}
+
+.github-link svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+}
